@@ -1,0 +1,36 @@
+﻿@model NewForumProject.Models.Block
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Block</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Date)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Date)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BlockerUser.Username)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BlockerUser.Username)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BlockedUser.Username)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BlockedUser.Username)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.BlockID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,83 @@
+﻿
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - מערכת לניהול קורסים</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+</head>
+<body>
+    <div class="container-fixed-top">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("עדכון פרטים אישיים", "edit", "User")</li>
+                    <li>@Html.ActionLink("הקורסים שלי", "About", "Home")</li>
+                    <li>@Html.ActionLink("החומר שלי", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("חיפוש קורס", "search", "User")</li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+    </div>
+    <!-- /.container-fluid -->
+    <div class="container body-content">
+        <div class="row" id="userpic">
+
+
+
+            <div class="databox bg-white radius-bordered">
+                <div class="databox-left no-padding">
+                    @*@{
+                    string filepath = "../Content/user-default-profile.jpg";
+                    if (@Url.Action("Photo", "User", new {UserId = User.UserID}) == null)
+                    {
+                    filepath = "../Content/user-default-profile.jpg";
+                    }
+                    else
+                    {
+                    filepath = "@Url.Action(\"Photo\", \"User\", new {UserId = User.UserID})";
+                    }
+                    }*@
+                    <img src="@Url.Action("Photo", "User", new {UserId = User.UserID})" style="width: 65px; height: 65px;">
+
+                </div>
+                <div class="databox-right padding-top-20">
+                    <div class="databox-stat palegreen">
+                        <i class="stat-icon icon-xlg fa fa-phone"></i>
+                    </div>
+                    @*<div class="databox-text darkgray">@User.FirstName</div>*@
+
+                </div>
+            </div>
+
+
+        </div>
+        <div id="welcome">
+            @RenderBody()
+        </div>
+        <hr />
+        @RenderSection("scripts", required: false)
+    </div>
+    <footer>
+        <p id="footerp">&copy; @DateTime.Now.Year - Tatiana Pavlov, Renana Shneor</p>
+    </footer>
+</body>
+</html>

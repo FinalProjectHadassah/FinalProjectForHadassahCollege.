@@ -1,0 +1,76 @@
+﻿@model NewForumProject.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<h1>@ViewBag.Message</h1>
+<h1>עדכון פרטים אישיים</h1>
+<div id="userDetails" style="direction: rtl">
+    @using (Html.BeginForm())
+    {
+        <h4> @User.FirstName </h4>
+        <h4> @User.LastName</h4>
+        <br/>
+        <br/>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName)
+                @Html.ValidationMessageFor(model => model.FirstName)
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName)
+                @Html.ValidationMessageFor(model => model.LastName)
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="שלח" class="btn btn-default"/>
+            </div>
+        </div>
+        <br/>
+        <br/>
+
+    }
+
+</div>
+
+<h2>האעלת תמונת פרופיל</h2>
+@using (Html.BeginForm("UploadPhoto", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <fieldset>
+        
+        <br />
+        <br />
+        <div class="editor-label">
+            <label for="profile">FileName:</label>
+        </div>
+        <br />
+        <br />
+        <div class="editor-field">
+            <input name="Profile" id="profile" type="file"/>
+        </div>
+        <br />
+        <br />
+        <p>
+            <input type="submit" value="האעלה"/>
+        </p>
+        <br />
+        <br />
+    </fieldset>
+}
+
+<div id="userMenu">
+    <h4>@Html.ActionLink("יציאה", "LogOut", "Account", null, null)</h4>
+</div>
+
+
+

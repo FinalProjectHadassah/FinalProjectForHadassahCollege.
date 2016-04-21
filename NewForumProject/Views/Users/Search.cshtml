@@ -1,0 +1,30 @@
+﻿@using System.Data.Entity.Core.Common.EntitySql
+@using Microsoft.Ajax.Utilities
+@model NewForumProject.Models.User
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+<h2>Search</h2>
+<input type="text" id="inputText" />
+<div id="SearchUsers"></div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#inputText').on('change keyup paste mouseup', function () {
+            RunAction();
+        });
+        RunAction();
+    });
+    function RunAction() {
+        var action = '@Url.Action("Search", "Users")';
+        var value = $('#inputText').val();
+        $.post(action, { Name: value }, function (data) {
+            $("#SearchUsers").html(data);
+        })}
+</script>
+@section scripts{
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+}

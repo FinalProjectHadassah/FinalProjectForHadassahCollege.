@@ -1,0 +1,59 @@
+﻿@model IEnumerable<NewForumProject.Models.Subject>
+
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<h1>@ViewBag.Message</h1>
+<h1>חיפוש קורסים</h1>
+<div id="userDetails" style="direction: rtl">
+    @using (Html.BeginForm("SearchCourse", "Home", FormMethod.Get))
+    {
+        <br />
+        <br />
+        <div class="form-group" style="text-align: center">
+
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="search" name="searchSubject">
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                 <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+        <br />
+        <br />
+    }
+</div>
+<table>
+    <tr>
+        <th>
+            Subject Name
+        </th>
+    </tr>
+
+    @foreach (var s in Model)
+    {
+        <tr>
+            <td>
+                @s.SubjectName
+            </td>
+            <td>
+                @s.Academy.AcademyName
+            </td>
+            <td>
+                @s.LectureType
+            </td>
+            <td>
+                @s.MustAttend
+            </td>
+
+        </tr>
+    }
+</table>
+
+

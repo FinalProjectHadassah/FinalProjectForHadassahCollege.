@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<h1>@ViewBag.Message</h1>
+<h1>האזור האישי שלך</h1>
+<h3> ברוכים הבאים    @User.FirstName!</h3>
+
+<div id="userMenu">
+    <h4>@Html.ActionLink("לחסום משתמשים אחרים", "Index", "Block", null, null)</h4>
+    <h4>@Html.ActionLink("יציאה", "LogOut", "Account", null, null)</h4>
+</div>
