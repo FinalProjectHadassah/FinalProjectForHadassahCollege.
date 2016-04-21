@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NewForumProject.Models
 {
+    //test commit 2
     public class User
     {
         public User()
