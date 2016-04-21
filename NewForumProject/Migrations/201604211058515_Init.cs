@@ -62,6 +62,23 @@ namespace NewForumProject.Migrations
                 .PrimaryKey(t => t.RoleID);
             
             CreateTable(
+                "dbo.Subjects",
+                c => new
+                    {
+                        SubjectID = c.Int(nullable: false, identity: true),
+                        SubjectName = c.String(nullable: false),
+                        LectureType = c.Int(nullable: false),
+                        MustAttend = c.Boolean(nullable: false),
+                        AcademyID = c.Int(nullable: false),
+                        User_UserID = c.Int(),
+                    })
+                .PrimaryKey(t => t.SubjectID)
+                .ForeignKey("dbo.Academies", t => t.AcademyID)
+                .ForeignKey("dbo.Users", t => t.User_UserID)
+                .Index(t => t.AcademyID)
+                .Index(t => t.User_UserID);
+            
+            CreateTable(
                 "dbo.Categories",
                 c => new
                     {
@@ -247,20 +264,6 @@ namespace NewForumProject.Migrations
                 .Index(t => t.UserID);
             
             CreateTable(
-                "dbo.Subjects",
-                c => new
-                    {
-                        SubjectID = c.Int(nullable: false, identity: true),
-                        SubjectName = c.String(nullable: false),
-                        LectureType = c.Int(nullable: false),
-                        MustAttend = c.Boolean(nullable: false),
-                        AcademyID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.SubjectID)
-                .ForeignKey("dbo.Academies", t => t.AcademyID)
-                .Index(t => t.AcademyID);
-            
-            CreateTable(
                 "dbo.Languages",
                 c => new
                     {
@@ -378,7 +381,6 @@ namespace NewForumProject.Migrations
             DropForeignKey("dbo.Settings", "LanguageID", "dbo.Languages");
             DropForeignKey("dbo.Files", "UserID", "dbo.Users");
             DropForeignKey("dbo.Files", "SubjectID", "dbo.Subjects");
-            DropForeignKey("dbo.Subjects", "AcademyID", "dbo.Academies");
             DropForeignKey("dbo.Topics", "UserID", "dbo.Users");
             DropForeignKey("dbo.Posts", "Topic_TopicID", "dbo.Topics");
             DropForeignKey("dbo.Topics", "PollID", "dbo.Polls");
@@ -400,6 +402,8 @@ namespace NewForumProject.Migrations
             DropForeignKey("dbo.Categories", "ParentCategoryID", "dbo.Categories");
             DropForeignKey("dbo.Blocks", "BlockerUserID", "dbo.Users");
             DropForeignKey("dbo.Blocks", "BlockedUserID", "dbo.Users");
+            DropForeignKey("dbo.Subjects", "User_UserID", "dbo.Users");
+            DropForeignKey("dbo.Subjects", "AcademyID", "dbo.Academies");
             DropForeignKey("dbo.UserRoles", "RoleID", "dbo.Roles");
             DropForeignKey("dbo.UserRoles", "UserID", "dbo.Users");
             DropForeignKey("dbo.Users", "AcademyID", "dbo.Academies");
@@ -407,7 +411,6 @@ namespace NewForumProject.Migrations
             DropIndex("dbo.UserRoles", new[] { "UserID" });
             DropIndex("dbo.Settings", new[] { "LanguageID" });
             DropIndex("dbo.Settings", new[] { "RoleID" });
-            DropIndex("dbo.Subjects", new[] { "AcademyID" });
             DropIndex("dbo.Files", new[] { "UserID" });
             DropIndex("dbo.Files", new[] { "SubjectID" });
             DropIndex("dbo.PollVotes", new[] { "UserID" });
@@ -429,6 +432,8 @@ namespace NewForumProject.Migrations
             DropIndex("dbo.Topics", new[] { "CategoryID" });
             DropIndex("dbo.Topics", new[] { "LastPostID" });
             DropIndex("dbo.Categories", new[] { "ParentCategoryID" });
+            DropIndex("dbo.Subjects", new[] { "User_UserID" });
+            DropIndex("dbo.Subjects", new[] { "AcademyID" });
             DropIndex("dbo.Users", new[] { "AcademyID" });
             DropIndex("dbo.Blocks", new[] { "BlockedUserID" });
             DropIndex("dbo.Blocks", new[] { "BlockerUserID" });
@@ -436,7 +441,6 @@ namespace NewForumProject.Migrations
             DropTable("dbo.Settings");
             DropTable("dbo.Logs");
             DropTable("dbo.Languages");
-            DropTable("dbo.Subjects");
             DropTable("dbo.Files");
             DropTable("dbo.PollVotes");
             DropTable("dbo.PollAnswers");
@@ -447,6 +451,7 @@ namespace NewForumProject.Migrations
             DropTable("dbo.Favorites");
             DropTable("dbo.Topics");
             DropTable("dbo.Categories");
+            DropTable("dbo.Subjects");
             DropTable("dbo.Roles");
             DropTable("dbo.Users");
             DropTable("dbo.Blocks");

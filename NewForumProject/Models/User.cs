@@ -36,6 +36,8 @@ namespace NewForumProject.Models
 
         public virtual ICollection<Role> Roles { get; set; }
 
+        public virtual ICollection<Subject> Subjects { get; set; }
+
         [ForeignKey("AcademyID")]
         public virtual Academy Academy { get; set; }
 

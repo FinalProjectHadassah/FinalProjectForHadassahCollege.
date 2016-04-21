@@ -49,6 +49,18 @@ namespace NewForumProject.Repositories
             return new FileContentResult(user.ProfilePicture, "image/jpeg");
         }
 
+        public IEnumerable<Subject> GetUserSubjectsById(int id)
+        {
+            var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
+            return user.Subjects.ToList();
+        }
+
+        public void SignUserToSubject(Subject subject, int id)
+        {
+            var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
+            user.Subjects.Add(subject);
+        }
+
         public bool SaveChanges()
         {
             try

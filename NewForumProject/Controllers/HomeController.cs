@@ -44,5 +44,7 @@ namespace NewForumProject.Controllers
             var subjects = repository.FindSubjectByName(searchSubject);
             return View(subjects);
         }
+
+
     }
 }

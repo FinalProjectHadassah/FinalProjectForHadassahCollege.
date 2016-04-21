@@ -178,9 +178,9 @@
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />
-    <Compile Include="Migrations\201604201206336_Init.cs" />
-    <Compile Include="Migrations\201604201206336_Init.Designer.cs">
-      <DependentUpon>201604201206336_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201604211058515_Init.cs" />
+    <Compile Include="Migrations\201604211058515_Init.Designer.cs">
+      <DependentUpon>201604211058515_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Academy.cs" />
     <Compile Include="Models\Block.cs" />
@@ -468,6 +468,8 @@
     <Content Include="Views\Shared\_CourseLayout.cshtml" />
     <Content Include="Views\Users\Search.cshtml" />
     <Content Include="Views\Users\_SearchedUsersListPartial.cshtml" />
+    <Content Include="Views\User\courses.cshtml" />
+    <None Include="Views\User\SignToCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -480,8 +482,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604201206336_Init.resx">
-      <DependentUpon>201604201206336_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604211058515_Init.resx">
+      <DependentUpon>201604211058515_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

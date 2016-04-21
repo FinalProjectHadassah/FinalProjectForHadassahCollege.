@@ -6,7 +6,7 @@
 <h1>@ViewBag.Message</h1>
 <h1>חיפוש קורסים</h1>
 <div id="userDetails" style="direction: rtl">
-    @using (Html.BeginForm("SearchCourse", "Home", FormMethod.Get))
+    @using (Html.BeginForm("Search", "User", FormMethod.Get))
     {
         <br />
         <br />
@@ -29,31 +29,56 @@
         <br />
     }
 </div>
-<table>
-    <tr>
-        <th>
-            Subject Name
-        </th>
-    </tr>
-
-    @foreach (var s in Model)
-    {
+<table class="table table-bordered table-striped table-responsive">
+    <thead>
         <tr>
-            <td>
-                @s.SubjectName
-            </td>
-            <td>
-                @s.Academy.AcademyName
-            </td>
-            <td>
-                @s.LectureType
-            </td>
-            <td>
-                @s.MustAttend
-            </td>
+            <th>
+                Subject Name
+            </th>
+            <th>
+                AcademyName
+            </th>
+            <th>
+                Lecture Type
+            </th>
+            <th>
+                Attendance
+            </th>
+            <th>
+                Sign To Course
+            </th>
 
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>
+                    @s.SubjectName
+                </td>
+                <td>
+                    @s.Academy.AcademyName
+                </td>
+                <td>
+                    @s.LectureType
+                </td>
+                <td>
+                    @s.MustAttend
+                </td>
+                <td>
+                    @Html.BeginForm("SignToCourse", "User", s))
+                    {
+                    <input type="submit" value="הרשמה" />
+                    }
+                </td>
+
+            </tr>
+        }
+    <tbody>
 </table>
+
+
+
 
 

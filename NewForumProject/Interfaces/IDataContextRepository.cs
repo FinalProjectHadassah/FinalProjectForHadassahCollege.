@@ -16,9 +16,11 @@ namespace NewForumProject.Interfaces
         IEnumerable<Academy> GetAllAcademies();
         bool EditUser(User user);
         IEnumerable<Block> GetBlocks();
-        Academy GetAcademyById(int academyId);
 
-        Academy Get(int id);
+        IEnumerable<Subject> GetUserSubjectsById(int id);
+
+        void SignUserToSubject(Subject subject, int id);
+
 
         void Save(Academy entity);
 

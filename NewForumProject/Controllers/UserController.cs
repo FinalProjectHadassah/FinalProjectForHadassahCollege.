@@ -1,4 +1,5 @@
 ﻿using NewForumProject.DAL.NewForumProject;
+using NewForumProject.Models;
 using NewForumProject.Repositories;
 using NLog;
 using System;
@@ -36,10 +37,13 @@ namespace NewForumProject.Controllers
             //string fullName = User != null ? User.FirstName + " " + User.LastName : "You are not supposed to be here";
             return View();
         }
-        public ActionResult search()
+        [HttpGet]
+        public ActionResult Search(string searchSubject)
         {
-            //string fullName = User != null ? User.FirstName + " " + User.LastName : "You are not supposed to be here";
-            return View();
+
+            logger.Info("User gets the results of course basic info search");
+            var subjects = repository.FindSubjectByName(searchSubject);
+            return View(subjects);
         }
         public FileContentResult Photo(int userId)
         {
@@ -72,6 +76,19 @@ namespace NewForumProject.Controllers
             return RedirectToAction("Index", "User");
         }
 
+        //[HttpPost]
+        public ActionResult SignToCourse(Subject subject)
+        {
+            var userid = User.UserID;
+            repository.SignUserToSubject(subject, userid);
+            return View();
 
+        }
+        public ActionResult Courses()
+        {
+            var userid = User.UserID;
+            var subjects = repository.GetUserSubjectsById(userid);
+            return View(subjects);
+        }
     }
 }

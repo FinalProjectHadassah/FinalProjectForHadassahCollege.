@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "courses";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Subject Name
+            </th>
+            <th>
+                AcademyName
+            </th>
+            <th>
+                Lecture Type
+            </th>
+            <th>
+                Attendance
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>
+                    @s.SubjectName
+                </td>
+                <td>
+                    @s.Academy.AcademyName
+                </td>
+                <td>
+                    @s.LectureType
+                </td>
+                <td>
+                    @s.MustAttend
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
