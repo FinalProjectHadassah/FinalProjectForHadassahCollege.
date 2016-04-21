@@ -67,10 +67,9 @@
                     @s.MustAttend
                 </td>
                 <td>
-                    @Html.BeginForm("SignToCourse", "User", s))
-                    {
-                    <input type="submit" value="הרשמה" />
-                    }
+                    
+                    <input type="button" value="הרשמה" onclick="location.href='@Url.Action("SignToCourse", "User", s)'" />
+                    
                 </td>
 
             </tr>
