@@ -80,12 +80,12 @@ namespace NewForumProject.Controllers
 
                         if (roles.Contains("Admin"))
                         {
-                            logger.Info("Administratior: " + User.FirstName + " " + User.LastName + " Loged In.");
+                            logger.Info("Administratior: " + user.FirstName + " " + user.LastName + " Loged In.");
                             return RedirectToAction("Index", "Admin");
                         }
                         else if (roles.Contains("User"))
                         {
-                            logger.Info("User: " + User.FirstName + " " + User.LastName + " Loged In.");
+                            logger.Info("User: " + user.FirstName + " " + user.LastName + " Loged In.");
                             return RedirectToAction("Index", "User");
                         }
                         else
