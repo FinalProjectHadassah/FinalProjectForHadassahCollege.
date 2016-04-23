@@ -1,4 +1,4 @@
-﻿
+﻿@model  Picture
 <!DOCTYPE html>
 <html dir="rtl" lang="he">
 <head>
@@ -41,23 +41,9 @@
     <div class="container body-content">
         <div class="row" id="userpic">
 
-
-
             <div class="databox bg-white radius-bordered">
                 <div class="databox-left no-padding">
-                    @*@{
-                    string filepath = "../Content/user-default-profile.jpg";
-                    if (@Url.Action("Photo", "User", new {UserId = User.UserID}) == null)
-                    {
-                    filepath = "../Content/user-default-profile.jpg";
-                    }
-                    else
-                    {
-                    filepath = "@Url.Action(\"Photo\", \"User\", new {UserId = User.UserID})";
-                    }
-                    }*@
-                    <img src="@Url.Action("Photo", "User", new {UserId = User.UserID})" style="width: 65px; height: 65px;">
-
+                    <img alt="" src="@Url.Action("GetPhoto", "User")" height="50" width="50" class="photo" />
                 </div>
                 <div class="databox-right padding-top-20">
                     <div class="databox-stat palegreen">

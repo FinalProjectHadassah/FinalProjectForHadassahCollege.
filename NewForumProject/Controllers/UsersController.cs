@@ -8,7 +8,6 @@ using System.Web.Mvc;
 namespace NewForumProject.Controllers
 {
     using NewForumProject.Repositories;
-    using System.Collections.Generic;
 
     public class UsersController : Controller
     {
@@ -26,6 +25,7 @@ namespace NewForumProject.Controllers
             logger.Info("You have visited the Index view");
             var users = repository.GetAllUsers();
             //db.Users.Include(u => u.Academy);
+
             return View(users.ToList());
         }
 

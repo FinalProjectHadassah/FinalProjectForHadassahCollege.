@@ -2,9 +2,9 @@
 using NewForumProject.Models;
 using NewForumProject.Repositories;
 using NLog;
-using System;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Providers.Entities;
 
 namespace NewForumProject.Controllers
 {
@@ -29,12 +29,12 @@ namespace NewForumProject.Controllers
         public ActionResult Index()
         {
             string fullName = User != null ? User.FirstName + " " + User.LastName : "You are not supposed to be here";
+
             return View();
         }
 
         public ActionResult edit()
         {
-            //string fullName = User != null ? User.FirstName + " " + User.LastName : "You are not supposed to be here";
             return View();
         }
         [HttpGet]
@@ -45,33 +45,34 @@ namespace NewForumProject.Controllers
             var subjects = repository.FindSubjectByName(searchSubject);
             return View(subjects);
         }
-        public FileContentResult Photo(int userId)
-        {
-            // get EF Database (maybe different way in your applicaiton)
-            var photo = repository.GetUserPicById(userId);
-            return photo;
 
-            //return File("C:/Users/Home/Dropbox/Security-Role-UserBased/NewForumProject/Content/user-default-profile.jpg", "image/jpeg");
-        }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UploadPhoto(HttpPostedFileBase Profile)
+        public ActionResult UploadPhoto(HttpPostedFileBase file)
         {
-            // get EF Database (maybe different way in your applicaiton)
+            if (ModelState.IsValid)
+            {
+                var userid = User.UserID;
+                var user = repository.GetUserById(userid);
+                repository.DeleteAllAvatarsFromUser(userid);
 
-
-            // find the user. I am skipping validations and other checks.
-            var userid = User.UserID;
-            var user = repository.GetUserById(userid);
-
-            // convert image stream to byte array
-            byte[] image = new byte[Profile.ContentLength];
-            Profile.InputStream.Read(image, 0, Convert.ToInt32(Profile.ContentLength));
-
-            user.ProfilePicture = image;
-
-            // save changes to database
-            repository.SaveChanges();
+                if (file != null && file.ContentLength > 0)
+                {
+                    var avatar = new Picture
+                    {
+                        User = user,
+                        PictureName = System.IO.Path.GetFileName(file.FileName),
+                        Type = FileType.Avatar,
+                        ContentType = file.ContentType
+                    };
+                    using (var reader = new System.IO.BinaryReader(file.InputStream))
+                    {
+                        avatar.Content = reader.ReadBytes(file.ContentLength);
+                    }
+                    repository.SavePicture(avatar, userid);
+                }
+                return RedirectToAction("Index", "User");
+            }
 
             return RedirectToAction("Index", "User");
         }
@@ -89,6 +90,15 @@ namespace NewForumProject.Controllers
             var userid = User.UserID;
             var subjects = repository.GetUserSubjectsById(userid);
             return View(subjects);
+        }
+
+        [Authorize]
+        public ActionResult GetPhoto()
+        {
+            string user = Session["UserName"] as string;
+            var userId = User.UserID;
+            var photo = repository.GetPhoto(userId);
+            return File(photo, "image/jpeg");
         }
     }
 }

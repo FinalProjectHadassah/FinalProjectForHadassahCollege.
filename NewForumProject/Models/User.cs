@@ -40,7 +40,6 @@ namespace NewForumProject.Models
 
         [ForeignKey("AcademyID")]
         public virtual Academy Academy { get; set; }
-
-        public byte[] ProfilePicture { get; set; }
+        public virtual ICollection<Picture> Pictures { get; set; }
     }
 }

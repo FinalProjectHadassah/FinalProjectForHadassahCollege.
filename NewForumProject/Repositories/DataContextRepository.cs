@@ -1,11 +1,12 @@
-﻿using System;
+﻿using NewForumProject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
 namespace NewForumProject.Repositories
 {
-    using Models;
+
     using NewForumProject.DAL;
     using NewForumProject.Interfaces;
     using System.Data.Entity;
@@ -45,8 +46,8 @@ namespace NewForumProject.Repositories
 
         public FileContentResult GetUserPicById(int userID)
         {
-            var user = db.Users.Where(x => x.UserID == userID).FirstOrDefault();
-            return new FileContentResult(user.ProfilePicture, "image/jpeg");
+            var picture = db.Pictures.Where(x => x.UserId == userID).FirstOrDefault();
+            return new FileContentResult(picture.Content, "image/jpeg");
         }
 
         public IEnumerable<Subject> GetUserSubjectsById(int id)
@@ -236,6 +237,46 @@ namespace NewForumProject.Repositories
         public IEnumerable<User> SearchUsers(string Name)
         {
             return string.IsNullOrEmpty(Name) ? this.db.Users.ToList() : this.db.Users.Where(x => x.FirstName.StartsWith(Name) || x.LastName.StartsWith(Name)).ToList();
+        }
+
+        public bool SavePicture(Picture avatar, int UserID)
+        {
+            try
+            {
+                db.Pictures.Add(avatar);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public byte[] GetPhoto(int UserId)//add to interface
+        {
+            byte[] photo = db
+            .Pictures
+            .Where(p => p.UserId == UserId)
+            .Select(img => img.Content)
+            .FirstOrDefault();
+
+            return photo;
+        }
+
+        public bool DeleteAllAvatarsFromUser(int userId)
+        {
+            try
+            {
+                var picToRemove = db.Pictures.Where(e => e.UserId == userId && e.Type == FileType.Avatar).ToList();
+                db.Pictures.RemoveRange(picToRemove);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

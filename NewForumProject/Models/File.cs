@@ -6,7 +6,7 @@ namespace NewForumProject.Models
 {
     public class File
     {
-        public enum FileType { Exam, Slides, Summary, Exercise, HelpMaterial }
+        public enum MaterialType { Exam, Slides, Summary, Exercise, HelpMaterial }
 
         public int FileID { get; set; }
 
@@ -14,7 +14,7 @@ namespace NewForumProject.Models
         public string FileName { get; set; }
 
         [Required]
-        public FileType Type { get; set; }
+        public MaterialType Type { get; set; }
 
         [Required]
         public DateTime UploadDate { get; set; }

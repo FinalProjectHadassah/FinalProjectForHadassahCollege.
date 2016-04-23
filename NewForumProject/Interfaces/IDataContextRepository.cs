@@ -1,6 +1,5 @@
 ﻿using NewForumProject.Models;
 using System;
-using System.Web.Mvc;
 
 namespace NewForumProject.Interfaces
 {
@@ -10,8 +9,6 @@ namespace NewForumProject.Interfaces
         IEnumerable<User> GetAllUsers();
         User GetUserById(int userid);
         bool AddUser(User user);
-
-        FileContentResult GetUserPicById(int userID);
         bool SaveChanges();
         IEnumerable<Academy> GetAllAcademies();
         bool EditUser(User user);
@@ -20,7 +17,6 @@ namespace NewForumProject.Interfaces
         IEnumerable<Subject> GetUserSubjectsById(int id);
 
         void SignUserToSubject(Subject subject, int id);
-
 
         void Save(Academy entity);
 

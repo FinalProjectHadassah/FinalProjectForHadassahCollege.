@@ -178,9 +178,9 @@
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />
-    <Compile Include="Migrations\201604211058515_Init.cs" />
-    <Compile Include="Migrations\201604211058515_Init.Designer.cs">
-      <DependentUpon>201604211058515_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201604230916155_Init.cs" />
+    <Compile Include="Migrations\201604230916155_Init.Designer.cs">
+      <DependentUpon>201604230916155_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Academy.cs" />
     <Compile Include="Models\Block.cs" />
@@ -189,9 +189,11 @@
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\File.cs" />
+    <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\Log.cs" />
     <Compile Include="Models\Password.cs" />
+    <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\Poll.cs" />
     <Compile Include="Models\PollAnswer.cs" />
     <Compile Include="Models\PollVote.cs" />
@@ -482,8 +484,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604211058515_Init.resx">
-      <DependentUpon>201604211058515_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604230916155_Init.resx">
+      <DependentUpon>201604230916155_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

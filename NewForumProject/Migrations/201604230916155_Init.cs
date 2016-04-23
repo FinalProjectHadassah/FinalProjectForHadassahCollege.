@@ -45,11 +45,25 @@ namespace NewForumProject.Migrations
                         CreateDate = c.DateTime(nullable: false),
                         AcademyID = c.Int(nullable: false),
                         Salt = c.Int(),
-                        ProfilePicture = c.Binary(),
                     })
                 .PrimaryKey(t => t.UserID)
                 .ForeignKey("dbo.Academies", t => t.AcademyID)
                 .Index(t => t.AcademyID);
+            
+            CreateTable(
+                "dbo.Pictures",
+                c => new
+                    {
+                        PictureID = c.Int(nullable: false, identity: true),
+                        PictureName = c.String(maxLength: 255),
+                        ContentType = c.String(maxLength: 100),
+                        Content = c.Binary(),
+                        Type = c.Int(nullable: false),
+                        UserId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.PictureID)
+                .ForeignKey("dbo.Users", t => t.UserId)
+                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.Roles",
@@ -406,6 +420,7 @@ namespace NewForumProject.Migrations
             DropForeignKey("dbo.Subjects", "AcademyID", "dbo.Academies");
             DropForeignKey("dbo.UserRoles", "RoleID", "dbo.Roles");
             DropForeignKey("dbo.UserRoles", "UserID", "dbo.Users");
+            DropForeignKey("dbo.Pictures", "UserId", "dbo.Users");
             DropForeignKey("dbo.Users", "AcademyID", "dbo.Academies");
             DropIndex("dbo.UserRoles", new[] { "RoleID" });
             DropIndex("dbo.UserRoles", new[] { "UserID" });
@@ -434,6 +449,7 @@ namespace NewForumProject.Migrations
             DropIndex("dbo.Categories", new[] { "ParentCategoryID" });
             DropIndex("dbo.Subjects", new[] { "User_UserID" });
             DropIndex("dbo.Subjects", new[] { "AcademyID" });
+            DropIndex("dbo.Pictures", new[] { "UserId" });
             DropIndex("dbo.Users", new[] { "AcademyID" });
             DropIndex("dbo.Blocks", new[] { "BlockedUserID" });
             DropIndex("dbo.Blocks", new[] { "BlockerUserID" });
@@ -453,6 +469,7 @@ namespace NewForumProject.Migrations
             DropTable("dbo.Categories");
             DropTable("dbo.Subjects");
             DropTable("dbo.Roles");
+            DropTable("dbo.Pictures");
             DropTable("dbo.Users");
             DropTable("dbo.Blocks");
             DropTable("dbo.Academies");
