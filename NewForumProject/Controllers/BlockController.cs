@@ -43,7 +43,6 @@ namespace NewForumProject.Controllers
         public ActionResult Create()
         {
             ViewBag.BlockerUserID = new SelectList(_db.Users, "UserID", "Username");
-            ViewBag.BlockedUserID = new SelectList(_db.Users, "UserID", "Username");
             return View();
         }
 
@@ -70,7 +69,6 @@ namespace NewForumProject.Controllers
             }
 
             ViewBag.BlockerUserID = new SelectList(_db.Users, "UserID", "Username", block.BlockerUserID);
-            ViewBag.BlockedUserID = new SelectList(_db.Users, "UserID", "Username", block.BlockedUserID);
             return View(block);
         }
 
@@ -85,7 +83,7 @@ namespace NewForumProject.Controllers
                 return HttpNotFound();
             }
             ViewBag.BlockerUserID = new SelectList(_db.Users, "UserID", "Username", block.BlockerUserID);
-            ViewBag.BlockedUserID = new SelectList(_db.Users, "UserID", "Username", block.BlockedUserID);
+           
             return View(block);
         }
 
@@ -103,7 +101,6 @@ namespace NewForumProject.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.BlockerUserID = new SelectList(_db.Users, "UserID", "Username", block.BlockerUserID);
-            ViewBag.BlockedUserID = new SelectList(_db.Users, "UserID", "Username", block.BlockedUserID);
             return View(block);
         }
 

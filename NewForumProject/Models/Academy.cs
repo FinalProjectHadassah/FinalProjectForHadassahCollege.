@@ -5,6 +5,8 @@ using System.Web;
 
 namespace NewForumProject.Models
 {
+    using System.ComponentModel;
+
     public class Academy : Entity
     {
         public Academy()
@@ -12,7 +14,7 @@ namespace NewForumProject.Models
         }
 
         public int AcademyID { get; set; }
-
+        [DisplayName("מוסד הלימודים")]
         public string AcademyName { get; set; }
     }
 }

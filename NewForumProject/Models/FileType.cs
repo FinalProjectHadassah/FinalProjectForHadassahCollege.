@@ -6,4 +6,14 @@ namespace NewForumProject.Models
         Avatar, Photo
     }
 
+    public enum ImageFormat
+    {
+        bmp,
+        jpeg,
+        gif,
+        tiff,
+        png,
+        unknown
+    }
+
 }

@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NewForumProject.Models
 {
+    using System.ComponentModel;
+
     //test commit 2
     public class User
     {
@@ -16,15 +18,18 @@ namespace NewForumProject.Models
         public int UserID { get; set; }
 
         [Required]
+        [DisplayName("שם משתמש")]
         public String Username { get; set; }
 
         [Required]
+        [DisplayName("דואר אלאקטרוני")]
         public String Email { get; set; }
 
         [Required]
         public String Password { get; set; }
-
+        [DisplayName("שם פרטי")]
         public String FirstName { get; set; }
+        [DisplayName("שם משפחה")]
         public String LastName { get; set; }
 
         public Boolean IsActive { get; set; }

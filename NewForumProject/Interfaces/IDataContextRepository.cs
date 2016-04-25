@@ -11,7 +11,6 @@ namespace NewForumProject.Interfaces
         bool AddUser(User user);
         bool SaveChanges();
         IEnumerable<Academy> GetAllAcademies();
-        bool EditUser(User user);
         IEnumerable<Block> GetBlocks();
 
         IEnumerable<Subject> GetUserSubjectsById(int id);

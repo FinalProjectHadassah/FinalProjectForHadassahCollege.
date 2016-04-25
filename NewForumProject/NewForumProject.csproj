@@ -186,6 +186,7 @@
     <Compile Include="Models\Block.cs" />
     <Compile Include="Models\BlockViewModel.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\EditUserViewModel.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\File.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Models\PollAnswer.cs" />
     <Compile Include="Models\PollVote.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\ProjectTools.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="DAL\Security\BaseViewPage.cs" />
     <Compile Include="DAL\Security\CustomAuthorizeAttribute.cs" />
@@ -466,11 +468,14 @@
     <Content Include="Views\Files\Details.cshtml" />
     <Content Include="Views\Files\Edit.cshtml" />
     <Content Include="Views\Files\Index.cshtml" />
+    <Content Include="Views\Error\DisplayError.cshtml" />
     <None Include="Views\Home\SearchCourse.cshtml" />
     <Content Include="Views\Shared\_CourseLayout.cshtml" />
     <Content Include="Views\Users\Search.cshtml" />
     <Content Include="Views\Users\_SearchedUsersListPartial.cshtml" />
     <Content Include="Views\User\courses.cshtml" />
+    <Content Include="Views\User\EditUser.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
     <None Include="Views\User\SignToCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>

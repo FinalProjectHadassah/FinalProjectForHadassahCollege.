@@ -6,13 +6,18 @@ using System.Web.Mvc;
 
 namespace NewForumProject.Controllers
 {
-	public class ErrorController : Controller
-	{
-		//
-		// GET: /Error/
-		public ActionResult AccessDenied()
-		{
-			return View();
-		}
-	}
+    public class ErrorController : Controller
+    {
+        //
+        // GET: /Error/
+        public ActionResult AccessDenied()
+        {
+            return View();
+        }
+
+        public ActionResult DisplayError(string errorMessage)
+        {
+            return this.View(errorMessage);
+        }
+    }
 }

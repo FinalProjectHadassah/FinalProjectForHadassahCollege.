@@ -1,6 +1,7 @@
 ﻿using NewForumProject.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -9,7 +10,6 @@ namespace NewForumProject.Repositories
 
     using NewForumProject.DAL;
     using NewForumProject.Interfaces;
-    using System.Data.Entity;
 
     public class DataContextRepository : IDataContextRepository
     {
@@ -41,13 +41,19 @@ namespace NewForumProject.Repositories
 
         public User GetUserById(int userID)
         {
-            return this.db.Users.Find(userID);
+            return this.db.Users.FirstOrDefault(e => e.UserID == userID);
         }
 
         public FileContentResult GetUserPicById(int userID)
         {
-            var picture = db.Pictures.Where(x => x.UserId == userID).FirstOrDefault();
+            var picture = db.Pictures.FirstOrDefault(x => x.UserId == userID);// todo: check if not null
             return new FileContentResult(picture.Content, "image/jpeg");
+        }
+
+        public Picture GetAvatarByUserId(int userID)
+        {
+            var picture = db.Pictures.FirstOrDefault(x => x.UserId == userID && x.Type == FileType.Avatar);// todo: check if not null
+            return picture;
         }
 
         public IEnumerable<Subject> GetUserSubjectsById(int id)
@@ -246,7 +252,7 @@ namespace NewForumProject.Repositories
                 db.Pictures.Add(avatar);
                 db.SaveChanges();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -278,5 +284,47 @@ namespace NewForumProject.Repositories
             }
             return true;
         }
+        public bool UserEditUser(UserEditUserViewModel model)
+        {
+            try
+            {
+                var user = db.Users.Find(model.UserID);
+                user.AcademyID = model.AcademyID;
+                user.Email = model.Email;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Username = model.Username;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+        //public bool editUser(EditUserViewModel model, int userId)
+        //{
+
+        //        user.FirstName = model.FirstName;
+        //        user.LastName = model.LastName;
+        //        user.Username = model.Username;
+        //        user.Email = model.Email;
+        //        user.AcademyID = model.AcademyID;
+        //        picture = model.Avatar;
+        //        this.repository.editUser(user, picture);
+        //    try
+        //    {
+        //        if (user != null) db.Entry(user).State = EntityState.Modified;
+        //        if (picture != null) db.Entry(picture).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return false;
+        //    }
+        //    return true;
+        //}
+
     }
 }
