@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="~/Content/semantic.css" rel="stylesheet"/>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css"/>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/semantic.js"></script>
+</head>
+<body>
+<div class="container-fixed-top">
+    <nav class="navbar navbar-inverse" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("עדכון פרטים אישיים", "EditUser", "User")</li>
+                <li>@Html.ActionLink("הקורסים שלי", "Courses", "User")</li>
+                <li>@Html.ActionLink("החומר שלי", "Contact", "Home")</li>
+                <li>@Html.ActionLink("חיפוש קורס", "Search", "User")</li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+</div>
+<!-- /.container-fluid -->
+<div class="container body-content">
+    <div class="row" id="userpic">
+
+        <div class="databox bg-white radius-bordered">
+            <div class="databox-left no-padding">
+                <img alt="" src="@Url.Action("GetPhoto", "User")" height="50" width="50" class="photo"/>
+            </div>
+            <div class="databox-right padding-top-20">
+                <div class="databox-stat palegreen">
+                    <i class="stat-icon icon-xlg fa fa-phone"></i>
+                </div>
+                @*<div class="databox-text darkgray">@User.FirstName</div>*@
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="ui top attached tabular menu">
+        <a class="item active" data-tab="first">Categories</a>
+        <a class="item" data-tab="second">Second</a>
+        <a class="item" data-tab="third">Third</a>
+    </div>
+    <div class="ui bottom attached tab segment active" data-tab="first">
+        @RenderBody()
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="second">
+        Second
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="third">
+        Third
+    </div>
+    @RenderSection("scripts", required: false)
+</div>
+
+<footer>
+    <p id="footerp">&copy; @DateTime.Now.Year - Tatiana Pavlov, Renana Shneor</p>
+</footer>
+</body>
+</html>
+<script>
+    $('.menu .item')
+        .tab();
+</script>

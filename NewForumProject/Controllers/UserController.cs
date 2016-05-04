@@ -106,13 +106,27 @@ namespace NewForumProject.Controllers
             return RedirectToAction("Index", "User");
         }
 
-        //[HttpPost]
-        public ActionResult SignToCourse(Subject subject)
-        {
-            var userid = User.UserID;
-            repository.SignUserToSubject(subject, userid);
-            return View();
 
+        public ActionResult ManualSignToCourse()
+        {
+            SearchSubjectViewModel model = new SearchSubjectViewModel();
+            ViewBag.AcademyID = new SelectList(repository.GetAllAcademies(), "AcademyID", "AcademyName", model.AcademyID);
+            ViewBag.SubjectID = new SelectList(repository.GetAllSubjects(), "SubjectID", "SubjectName", model.SubjectID);
+            return View(model);
+        }
+
+
+        //[HttpPost]
+        public ActionResult SignToCourse(SearchSubjectViewModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var userId = User.UserID;
+                repository.SignUserToSubject(model, userId);
+            }
+
+            return RedirectToAction("Courses", "User");
         }
 
         public ActionResult Courses()
@@ -171,8 +185,8 @@ namespace NewForumProject.Controllers
         public async Task<ActionResult> EditUser(UserEditUserViewModel model, HttpPostedFileBase file)
         {
 
-                // ModelState.AddModelError(string.Empty, "An image file must be chosen.");
-            
+            // ModelState.AddModelError(string.Empty, "An image file must be chosen.");
+
             if (ModelState.IsValid)
             {
                 if (file != null)
@@ -181,47 +195,47 @@ namespace NewForumProject.Controllers
                     // Upload the file to Azure Blob Storage
                     bool savedComplete = await Task.Run(
                         () =>
+                        {
+                            var userid = User.UserID;
+                            var user = repository.GetUserById(userid);
+                            byte[] resizedImage = new byte[0];
+                            var jpeg = new byte[] { 255, 216, 255, 224 }; // jpeg
+                            if (file.ContentLength > 0)
                             {
-                                var userid = User.UserID;
-                                var user = repository.GetUserById(userid);
-                                byte[] resizedImage = new byte[0];
-                                var jpeg = new byte[] { 255, 216, 255, 224 }; // jpeg
-                                if (file.ContentLength > 0)
+                                var filename = Path.GetFileName(file.FileName);
+                                try
                                 {
-                                    var filename = Path.GetFileName(file.FileName);
-                                    try
-                                    {
-                                        System.Drawing.Image sourceimage =
-                                            System.Drawing.Image.FromStream(file.InputStream);
-                                        var BitmapResizedImage = ProjectTools.ResizeImage(sourceimage, 50, 50);
-                                        resizedImage = ProjectTools.imageToByteArray(BitmapResizedImage);
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        ViewBag.ErrorMessage = ex.Message;
-                                        ModelState.AddModelError(string.Empty, "An image file must be chosen.");
-                                        return false;
-                                    }
-
+                                    System.Drawing.Image sourceimage =
+                                        System.Drawing.Image.FromStream(file.InputStream);
+                                    var BitmapResizedImage = ProjectTools.ResizeImage(sourceimage, 256, 256);
+                                    resizedImage = ProjectTools.imageToByteArray(BitmapResizedImage);
+                                }
+                                catch (Exception ex)
+                                {
+                                    ViewBag.ErrorMessage = ex.Message;
+                                    ModelState.AddModelError(string.Empty, "An image file must be chosen.");
+                                    return false;
                                 }
 
-                                repository.DeleteAllAvatarsFromUser(userid);
+                            }
 
-                                if (file != null && file.ContentLength > 0)
+                            repository.DeleteAllAvatarsFromUser(userid);
+
+                            if (file != null && file.ContentLength > 0)
+                            {
+                                var avatar = new Picture
                                 {
-                                    var avatar = new Picture
-                                                     {
-                                                         User = user,
-                                                         PictureName = System.IO.Path.GetFileName(file.FileName),
-                                                         Type = FileType.Avatar,
-                                                         ContentType = file.ContentType
-                                                     };
-                                    avatar.Content = resizedImage;
-                                    repository.SavePicture(avatar, userid);
-                                }
-                                return true;
+                                    User = user,
+                                    PictureName = System.IO.Path.GetFileName(file.FileName),
+                                    Type = FileType.Avatar,
+                                    ContentType = file.ContentType
+                                };
+                                avatar.Content = resizedImage;
+                                repository.SavePicture(avatar, userid);
+                            }
+                            return true;
 
-                            });
+                        });
                 }
                 if (User == null)
                 {
@@ -234,6 +248,11 @@ namespace NewForumProject.Controllers
             }
             ViewBag.AcademyID = new SelectList(repository.GetAllAcademies(), "AcademyID", "AcademyName", model.AcademyID);
             return View(model);
+        }
+
+        public ActionResult DeleteCourse()
+        {
+            return View();
         }
     }
 }

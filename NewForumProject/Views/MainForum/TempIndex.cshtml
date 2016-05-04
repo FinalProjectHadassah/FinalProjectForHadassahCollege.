@@ -1,0 +1,106 @@
+﻿@model IEnumerable<NewForumProject.Models.Topic>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ForumLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastPost.PostContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Poll.PollID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Solved)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SolvedReminderSent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Slug)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Views)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsSticky)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsLocked)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pending)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastPost.PostContent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Poll.PollID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Solved)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SolvedReminderSent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Slug)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Views)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsSticky)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsLocked)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pending)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TopicID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TopicID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TopicID })
+        </td>
+    </tr>
+}
+
+</table>

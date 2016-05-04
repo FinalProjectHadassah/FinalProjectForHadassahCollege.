@@ -38,7 +38,9 @@
                 <td>
                     @s.MustAttend
                 </td>
-
+                <td>
+                    <input type="button" value="מחק קורס" onclick="location.href='@Url.Action("DeleteCourse", "User", s)'" />
+                </td>
             </tr>
         }
     </tbody>

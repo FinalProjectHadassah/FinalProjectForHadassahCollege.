@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace NewForumProject.Models
 {
     using System.ComponentModel.DataAnnotations;
@@ -6,7 +8,11 @@ namespace NewForumProject.Models
 
     public class Subject : Entity
     {
-        public enum TypeOfLecture { Presentation, Lecture, Lab, Seminar, Practice }
+
+        public Subject()
+        {
+            this.Users = new List<User>();
+        }
         public int SubjectID { get; set; }
 
         [Required]
@@ -23,5 +29,9 @@ namespace NewForumProject.Models
 
         [ForeignKey("AcademyID")]
         public virtual Academy Academy { get; set; }
+
+        public virtual ICollection<User> Users { get; set; }
+
+
     }
 }

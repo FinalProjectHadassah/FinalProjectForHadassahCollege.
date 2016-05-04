@@ -62,10 +62,18 @@ namespace NewForumProject.Repositories
             return user.Subjects.ToList();
         }
 
-        public void SignUserToSubject(Subject subject, int id)
+        public bool SignUserToSubject(SearchSubjectViewModel model, int userId)
         {
-            var user = db.Users.Where(x => x.UserID == id).FirstOrDefault();
-            user.Subjects.Add(subject);
+            var user = db.Users.FirstOrDefault(x => x.UserID == userId);
+            var subject = db.Subjects.FirstOrDefault(e => e.SubjectID == model.SubjectID && e.Academy.AcademyID == model.AcademyID && e.LectureType == model.LectureType);
+            if (subject != null && user != null)
+            {
+                user.Subjects.Add(subject);
+                subject.Users.Add(user);
+                db.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
         public bool SaveChanges()
@@ -303,6 +311,13 @@ namespace NewForumProject.Repositories
             }
             return true;
         }
+
+
+        public IEnumerable<Subject> GetAllSubjects()
+        {
+            return db.Subjects.ToList();
+        }
+
         //public bool editUser(EditUserViewModel model, int userId)
         //{
 
@@ -325,6 +340,5 @@ namespace NewForumProject.Repositories
         //    }
         //    return true;
         //}
-
     }
 }

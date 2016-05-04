@@ -13,6 +13,8 @@ namespace NewForumProject.Models
         public User()
         {
             this.Roles = new List<Role>();
+            this.Subjects = new List<Subject>();
+            this.Pictures = new List<Picture>();
         }
 
         public int UserID { get; set; }

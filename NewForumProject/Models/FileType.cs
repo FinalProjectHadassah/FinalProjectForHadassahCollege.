@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel;
+
 namespace NewForumProject.Models
 {
     public enum FileType
@@ -14,6 +16,20 @@ namespace NewForumProject.Models
         tiff,
         png,
         unknown
+    }
+
+    public enum TypeOfLecture
+    {
+        [Description("מצגת")]
+        Presentation,
+        [Description("Lecture")]
+        Lecture,
+        [Description("Lab")]
+        Lab,
+        [Description("Seminar")]
+        Seminar,
+        [Description("Practice")]
+        Practice
     }
 
 }

@@ -15,7 +15,7 @@ namespace NewForumProject.Interfaces
 
         IEnumerable<Subject> GetUserSubjectsById(int id);
 
-        void SignUserToSubject(Subject subject, int id);
+        bool SignUserToSubject(SearchSubjectViewModel subject, int userId);
 
         void Save(Academy entity);
 
@@ -63,5 +63,7 @@ namespace NewForumProject.Interfaces
         void Delete(Favorite entity);
 
         IEnumerable<User> SearchUsers(string Name);
+
+        IEnumerable<Subject> GetAllSubjects();
     }
 }

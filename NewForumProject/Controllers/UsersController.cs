@@ -155,6 +155,7 @@ namespace NewForumProject.Controllers
             if (Request.IsAjaxRequest())
             {
                 var content = this.repository.SearchUsers(Name);
+                //Thread.Sleep(1000);
                 return this.PartialView("_SearchedUsersListPartial", content);
             }
             return this.View();

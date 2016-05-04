@@ -22,6 +22,15 @@ namespace NewForumProject.DAL
                     m.MapLeftKey("UserID");
                     m.MapRightKey("RoleID");
                 });
+            modelBuilder.Entity<User>()
+               .HasMany(u => u.Subjects)
+               .WithMany(r => r.Users)
+               .Map(m =>
+               {
+                   m.ToTable("UserSubjects");
+                   m.MapLeftKey("UserID");
+                   m.MapRightKey("SubjectID");
+               });
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
         }

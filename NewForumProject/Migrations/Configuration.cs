@@ -26,13 +26,13 @@ namespace NewForumProject.Migrations
 
             var courses = new List<Subject>
             {
-                new Subject{SubjectName= "Chemistry", Academy = academies.First(), LectureType = Subject.TypeOfLecture.Lecture, MustAttend = true},
-                new Subject{SubjectName="Microeconomics", Academy = academies.First(), LectureType = Subject.TypeOfLecture.Lab, MustAttend = false},
-                new Subject{SubjectName="Macroeconomics", Academy = academies.First(), LectureType = Subject.TypeOfLecture.Presentation, MustAttend = true},
-                new Subject{SubjectName="Calculus", Academy = academies.First(), LectureType = Subject.TypeOfLecture.Practice, MustAttend = false},
-                new Subject{SubjectName="Trigonometry", Academy = academies.First(), LectureType = Subject.TypeOfLecture.Lecture, MustAttend = true},
-                new Subject{SubjectName="Composition", Academy = academies.First(), LectureType = Subject.TypeOfLecture.Seminar, MustAttend = true},
-                new Subject{SubjectName="Literature", Academy = academies.First(), LectureType = Subject.TypeOfLecture.Lab, MustAttend = false}
+                new Subject{SubjectName= "Chemistry", Academy = academies.First(), LectureType = TypeOfLecture.Lecture, MustAttend = true},
+                new Subject{SubjectName="Microeconomics", Academy = academies.First(), LectureType = TypeOfLecture.Lab, MustAttend = false},
+                new Subject{SubjectName="Macroeconomics", Academy = academies.First(), LectureType = TypeOfLecture.Presentation, MustAttend = true},
+                new Subject{SubjectName="Calculus", Academy = academies.First(), LectureType = TypeOfLecture.Practice, MustAttend = false},
+                new Subject{SubjectName="Trigonometry", Academy = academies.First(), LectureType = TypeOfLecture.Lecture, MustAttend = true},
+                new Subject{SubjectName="Composition", Academy = academies.First(), LectureType = TypeOfLecture.Seminar, MustAttend = true},
+                new Subject{SubjectName="Literature", Academy = academies.First(), LectureType = TypeOfLecture.Lab, MustAttend = false}
             };
             //Fill table from ForumContext with data.
             courses.ForEach(s => context.Subjects.Add(s));

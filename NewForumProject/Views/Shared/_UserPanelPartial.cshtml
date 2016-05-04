@@ -1,0 +1,46 @@
+﻿
+
+@*<div class="row" id="userpic">
+
+    <div class="databox bg-white radius-bordered">
+        <div class="databox-left no-padding">
+            <img alt="" src="@Url.Action("GetPhoto", "User")" height="50" width="50" class="photo"/>
+        </div>
+        <div class="databox-right padding-top-20">
+            <div class="databox-stat palegreen">
+                <i class="stat-icon icon-xlg fa fa-phone"></i>
+            </div>
+            <div class="databox-text darkgray">@User.FirstName</div>
+
+        </div>
+    </div>
+</div>*@
+
+<div class="ui card">
+    <div class="image">
+        <img alt="" src="@Url.Action("GetPhoto", "User")" class="photo"/>
+    </div>
+    <div class="content">
+        <div class="header">@User.FirstName @User.LastName</div>
+        <div class="meta">
+            <a>Rating:</a>
+            <div class="ui mini star rating" data-rating="3" data-max-rating="5"></div>
+        </div>
+        <div class="description">
+            Matthew is an interior designer living in New York.
+        </div>
+    </div>
+    <div class="extra content">
+        <span class="right floated">
+            Joined in 2013
+        </span>
+        <span>
+            <i class="user icon"></i>
+            75 Friends
+        </span>
+    </div>
+</div>
+<script>
+    $('.ui.rating')
+        .rating('disable');
+</script>

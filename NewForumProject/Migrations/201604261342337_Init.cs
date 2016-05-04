@@ -84,13 +84,10 @@ namespace NewForumProject.Migrations
                         LectureType = c.Int(nullable: false),
                         MustAttend = c.Boolean(nullable: false),
                         AcademyID = c.Int(nullable: false),
-                        User_UserID = c.Int(),
                     })
                 .PrimaryKey(t => t.SubjectID)
                 .ForeignKey("dbo.Academies", t => t.AcademyID)
-                .ForeignKey("dbo.Users", t => t.User_UserID)
-                .Index(t => t.AcademyID)
-                .Index(t => t.User_UserID);
+                .Index(t => t.AcademyID);
             
             CreateTable(
                 "dbo.Categories",
@@ -387,6 +384,19 @@ namespace NewForumProject.Migrations
                 .Index(t => t.UserID)
                 .Index(t => t.RoleID);
             
+            CreateTable(
+                "dbo.UserSubjects",
+                c => new
+                    {
+                        UserID = c.Int(nullable: false),
+                        SubjectID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.UserID, t.SubjectID })
+                .ForeignKey("dbo.Users", t => t.UserID, cascadeDelete: true)
+                .ForeignKey("dbo.Subjects", t => t.SubjectID, cascadeDelete: true)
+                .Index(t => t.UserID)
+                .Index(t => t.SubjectID);
+            
         }
         
         public override void Down()
@@ -416,12 +426,15 @@ namespace NewForumProject.Migrations
             DropForeignKey("dbo.Categories", "ParentCategoryID", "dbo.Categories");
             DropForeignKey("dbo.Blocks", "BlockerUserID", "dbo.Users");
             DropForeignKey("dbo.Blocks", "BlockedUserID", "dbo.Users");
-            DropForeignKey("dbo.Subjects", "User_UserID", "dbo.Users");
+            DropForeignKey("dbo.UserSubjects", "SubjectID", "dbo.Subjects");
+            DropForeignKey("dbo.UserSubjects", "UserID", "dbo.Users");
             DropForeignKey("dbo.Subjects", "AcademyID", "dbo.Academies");
             DropForeignKey("dbo.UserRoles", "RoleID", "dbo.Roles");
             DropForeignKey("dbo.UserRoles", "UserID", "dbo.Users");
             DropForeignKey("dbo.Pictures", "UserId", "dbo.Users");
             DropForeignKey("dbo.Users", "AcademyID", "dbo.Academies");
+            DropIndex("dbo.UserSubjects", new[] { "SubjectID" });
+            DropIndex("dbo.UserSubjects", new[] { "UserID" });
             DropIndex("dbo.UserRoles", new[] { "RoleID" });
             DropIndex("dbo.UserRoles", new[] { "UserID" });
             DropIndex("dbo.Settings", new[] { "LanguageID" });
@@ -447,12 +460,12 @@ namespace NewForumProject.Migrations
             DropIndex("dbo.Topics", new[] { "CategoryID" });
             DropIndex("dbo.Topics", new[] { "LastPostID" });
             DropIndex("dbo.Categories", new[] { "ParentCategoryID" });
-            DropIndex("dbo.Subjects", new[] { "User_UserID" });
             DropIndex("dbo.Subjects", new[] { "AcademyID" });
             DropIndex("dbo.Pictures", new[] { "UserId" });
             DropIndex("dbo.Users", new[] { "AcademyID" });
             DropIndex("dbo.Blocks", new[] { "BlockedUserID" });
             DropIndex("dbo.Blocks", new[] { "BlockerUserID" });
+            DropTable("dbo.UserSubjects");
             DropTable("dbo.UserRoles");
             DropTable("dbo.Settings");
             DropTable("dbo.Logs");

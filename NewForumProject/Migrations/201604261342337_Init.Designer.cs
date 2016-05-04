@@ -13,7 +13,7 @@ namespace NewForumProject.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201604230916155_Init"; }
+            get { return "201604261342337_Init"; }
         }
         
         string IMigrationMetadata.Source
