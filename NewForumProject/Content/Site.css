@@ -5,12 +5,18 @@
             background-image: url('../Views/../Content/apple.jpg');
     background-repeat: no-repeat;
             color: #e6f3ff;
+             height: 100%;
+             margin:0;
+   padding:0;
 }
+
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    margin-bottom: 100px;
+    padding-bottom: 50px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -34,11 +40,13 @@ footer {
             border-top-color: #333333;
             border-top-width: 2px;
             border-top-style: solid;
+ 
             padding: 15px;
             /*background-color: #f3f4f4;*/
             height: 60px;
             width: 100%;
             bottom: 0;
+            left: 0;
             position: fixed;
         }
 #siteStory {
@@ -72,3 +80,23 @@ footer {
 #userMenu {
      padding: 15px;
 }
+.mainDiv {
+    min-height: 100%;
+    position: relative;
+}
+
+
+
+/*
+------------------------------
+  Tag Cloud
+------------------------------
+*/
+
+.tag1{font-size: 1em}
+.tag2{font-size: 1.2em}
+.tag3{font-size: 1.4em}
+.tag4{font-size: 1.7em}
+.tag5{font-size: 2em}
+.tag6{font-size: 2.2em}
+.tag7{font-size: 2.4em}

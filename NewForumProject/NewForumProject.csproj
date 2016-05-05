@@ -175,17 +175,20 @@
     <Compile Include="DAL\DataContext.cs" />
     <Compile Include="DAL\DataContextInitilizer.cs" />
     <Compile Include="Interfaces\IDataContextRepository.cs" />
-    <Compile Include="Migrations\201604261342337_Init.cs" />
-    <Compile Include="Migrations\201604261342337_Init.Designer.cs">
-      <DependentUpon>201604261342337_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201605041812255_Init.cs" />
+    <Compile Include="Migrations\201605041812255_Init.Designer.cs">
+      <DependentUpon>201605041812255_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Academy.cs" />
     <Compile Include="Models\Block.cs" />
+    <Compile Include="Models\MenuTag.cs" />
+    <Compile Include="Models\Tag.cs" />
+    <Compile Include="Models\TagCloud.cs" />
+    <Compile Include="Models\Topic.cs" />
     <Compile Include="ViewModels\BlockViewModel.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="ViewModels\EditUserViewModel.cs" />
     <Compile Include="Models\Entity.cs" />
-    <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\File.cs" />
     <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\Language.cs" />
@@ -205,7 +208,6 @@
     <Compile Include="ViewModels\SearchSubjectViewModel.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\Subject.cs" />
-    <Compile Include="Models\Topic.cs" />
     <Compile Include="Models\UploadFile.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Global.asax.cs">
@@ -231,6 +233,7 @@
     <Content Include="Content\congruent_pentagon.png" />
     <Content Include="Content\dataTables.bootstrap.css" />
     <Content Include="Content\demo.min.css" />
+    <Content Include="Content\denim.png" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\gridme.png" />
     <Content Include="Content\semantic.css" />
@@ -483,6 +486,7 @@
     <Content Include="Views\MainForum\Index.cshtml" />
     <Content Include="Views\MainForum\ListMainCategories.cshtml" />
     <Content Include="Views\Shared\_UserPanelPartial.cshtml" />
+    <Content Include="Views\Shared\_ForumLayoutNew.cshtml" />
     <None Include="Views\User\ManualSignToCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -495,8 +499,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604261342337_Init.resx">
-      <DependentUpon>201604261342337_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605041812255_Init.resx">
+      <DependentUpon>201605041812255_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

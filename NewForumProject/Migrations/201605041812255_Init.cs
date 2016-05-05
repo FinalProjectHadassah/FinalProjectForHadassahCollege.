@@ -143,24 +143,6 @@ namespace NewForumProject.Migrations
                 .Index(t => t.PollID);
             
             CreateTable(
-                "dbo.Favorites",
-                c => new
-                    {
-                        FavoriteID = c.Int(nullable: false, identity: true),
-                        DateCreated = c.DateTime(nullable: false),
-                        UserID = c.Int(nullable: false),
-                        PostID = c.Int(nullable: false),
-                        TopicID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.FavoriteID)
-                .ForeignKey("dbo.Posts", t => t.PostID)
-                .ForeignKey("dbo.Topics", t => t.TopicID)
-                .ForeignKey("dbo.Users", t => t.UserID)
-                .Index(t => t.UserID)
-                .Index(t => t.PostID)
-                .Index(t => t.TopicID);
-            
-            CreateTable(
                 "dbo.Posts",
                 c => new
                     {
@@ -177,14 +159,17 @@ namespace NewForumProject.Migrations
                         TopicID = c.Int(nullable: false),
                         UserID = c.Int(nullable: false),
                         Topic_TopicID = c.Int(),
+                        Tag_TagID = c.Int(),
                     })
                 .PrimaryKey(t => t.PostID)
                 .ForeignKey("dbo.Topics", t => t.TopicID)
                 .ForeignKey("dbo.Users", t => t.UserID)
                 .ForeignKey("dbo.Topics", t => t.Topic_TopicID)
+                .ForeignKey("dbo.Tags", t => t.Tag_TagID)
                 .Index(t => t.TopicID)
                 .Index(t => t.UserID)
-                .Index(t => t.Topic_TopicID);
+                .Index(t => t.Topic_TopicID)
+                .Index(t => t.Tag_TagID);
             
             CreateTable(
                 "dbo.UploadFiles",
@@ -372,6 +357,15 @@ namespace NewForumProject.Migrations
                 .Index(t => t.LanguageID);
             
             CreateTable(
+                "dbo.Tags",
+                c => new
+                    {
+                        TagID = c.Int(nullable: false, identity: true),
+                        Title = c.String(),
+                    })
+                .PrimaryKey(t => t.TagID);
+            
+            CreateTable(
                 "dbo.UserRoles",
                 c => new
                     {
@@ -401,6 +395,7 @@ namespace NewForumProject.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.Posts", "Tag_TagID", "dbo.Tags");
             DropForeignKey("dbo.Settings", "RoleID", "dbo.Roles");
             DropForeignKey("dbo.Settings", "LanguageID", "dbo.Languages");
             DropForeignKey("dbo.Files", "UserID", "dbo.Users");
@@ -413,15 +408,12 @@ namespace NewForumProject.Migrations
             DropForeignKey("dbo.PollVotes", "PollAnswerID", "dbo.PollAnswers");
             DropForeignKey("dbo.PollAnswers", "PollID", "dbo.Polls");
             DropForeignKey("dbo.Topics", "LastPostID", "dbo.Posts");
-            DropForeignKey("dbo.Favorites", "UserID", "dbo.Users");
-            DropForeignKey("dbo.Favorites", "TopicID", "dbo.Topics");
             DropForeignKey("dbo.Votes", "VotedByUserID", "dbo.Users");
             DropForeignKey("dbo.Votes", "UserID", "dbo.Users");
             DropForeignKey("dbo.Votes", "PostID", "dbo.Posts");
             DropForeignKey("dbo.Posts", "UserID", "dbo.Users");
             DropForeignKey("dbo.Posts", "TopicID", "dbo.Topics");
             DropForeignKey("dbo.UploadFiles", "Post_PostID", "dbo.Posts");
-            DropForeignKey("dbo.Favorites", "PostID", "dbo.Posts");
             DropForeignKey("dbo.Topics", "CategoryID", "dbo.Categories");
             DropForeignKey("dbo.Categories", "ParentCategoryID", "dbo.Categories");
             DropForeignKey("dbo.Blocks", "BlockerUserID", "dbo.Users");
@@ -449,12 +441,10 @@ namespace NewForumProject.Migrations
             DropIndex("dbo.Votes", new[] { "VotedByUserID" });
             DropIndex("dbo.Votes", new[] { "UserID" });
             DropIndex("dbo.UploadFiles", new[] { "Post_PostID" });
+            DropIndex("dbo.Posts", new[] { "Tag_TagID" });
             DropIndex("dbo.Posts", new[] { "Topic_TopicID" });
             DropIndex("dbo.Posts", new[] { "UserID" });
             DropIndex("dbo.Posts", new[] { "TopicID" });
-            DropIndex("dbo.Favorites", new[] { "TopicID" });
-            DropIndex("dbo.Favorites", new[] { "PostID" });
-            DropIndex("dbo.Favorites", new[] { "UserID" });
             DropIndex("dbo.Topics", new[] { "PollID" });
             DropIndex("dbo.Topics", new[] { "UserID" });
             DropIndex("dbo.Topics", new[] { "CategoryID" });
@@ -467,6 +457,7 @@ namespace NewForumProject.Migrations
             DropIndex("dbo.Blocks", new[] { "BlockerUserID" });
             DropTable("dbo.UserSubjects");
             DropTable("dbo.UserRoles");
+            DropTable("dbo.Tags");
             DropTable("dbo.Settings");
             DropTable("dbo.Logs");
             DropTable("dbo.Languages");
@@ -477,7 +468,6 @@ namespace NewForumProject.Migrations
             DropTable("dbo.Votes");
             DropTable("dbo.UploadFiles");
             DropTable("dbo.Posts");
-            DropTable("dbo.Favorites");
             DropTable("dbo.Topics");
             DropTable("dbo.Categories");
             DropTable("dbo.Subjects");

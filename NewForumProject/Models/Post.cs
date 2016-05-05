@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace NewForumProject.Models
 {
@@ -23,7 +21,7 @@ namespace NewForumProject.Models
         {
             Votes = new List<Vote>();
             Files = new List<UploadFile>();
-            Favorites = new List<Favorite>();
+
         }
 
         public int PostID { get; set; }
@@ -67,6 +65,5 @@ namespace NewForumProject.Models
 
         public virtual IList<UploadFile> Files { get; set; }
 
-        public virtual IList<Favorite> Favorites { get; set; }
     }
 }

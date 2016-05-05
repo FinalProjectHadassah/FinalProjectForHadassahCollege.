@@ -224,29 +224,7 @@ namespace NewForumProject.Repositories
             return GetPostById(id).DateEdited;
         }
         //================FAVORITES=========================
-        public Favorite GetFavoriteById(int id)
-        {
-            return db.Favorites.FirstOrDefault(x => x.FavoriteID == id);
-        }
 
-        public IEnumerable<Favorite> GetFavoriteByTopic(int id)
-        {
-            return db.Favorites.Where(x => x.TopicID == id).ToList();
-        }
-        public IEnumerable<Favorite> GetFavoriteByUser(int id)
-        {
-            return db.Favorites.Where(x => x.User.UserID == id).ToList();
-        }
-        //Favorite GetFavoriteByPost(int id);
-        public void Save(Favorite entity)
-        {
-            db.Favorites.Attach(entity);
-        }
-
-        public void Delete(Favorite entity)
-        {
-            db.Favorites.Remove(entity);
-        }
 
         public IEnumerable<User> SearchUsers(string Name)
         {

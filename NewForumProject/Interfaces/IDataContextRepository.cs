@@ -52,15 +52,7 @@ namespace NewForumProject.Interfaces
 
         DateTime GetDateEdited(int id);
 
-        Favorite GetFavoriteById(int id);
 
-        IEnumerable<Favorite> GetFavoriteByTopic(int id);
-
-        IEnumerable<Favorite> GetFavoriteByUser(int id);
-        //Favorite GetFavoriteByPost(int id);
-        void Save(Favorite entity);
-
-        void Delete(Favorite entity);
 
         IEnumerable<User> SearchUsers(string Name);
 

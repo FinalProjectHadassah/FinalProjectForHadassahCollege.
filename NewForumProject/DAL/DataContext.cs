@@ -41,7 +41,6 @@ namespace NewForumProject.DAL
         public DbSet<Block> Blocks { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Topic> Topics { get; set; }
-        public DbSet<Favorite> Favorites { get; set; }
         public DbSet<Vote> Votes { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Poll> Polls { get; set; }
@@ -52,5 +51,6 @@ namespace NewForumProject.DAL
         public DbSet<Log> Logs { get; set; }
         public DbSet<File> Files { get; set; }
         public DbSet<Picture> Pictures { get; set; }
+        public DbSet<Tag> Tags { get; set; }
     }
 }

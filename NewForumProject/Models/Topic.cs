@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace NewForumProject.Models
 {
@@ -13,7 +12,6 @@ namespace NewForumProject.Models
         public Topic()
         {
             Posts = new List<Post>();
-            Favorites = new List<Favorite>();
         }
         public int TopicID { get; set; }
 
@@ -56,7 +54,6 @@ namespace NewForumProject.Models
         [ForeignKey("PollID")]
         public virtual Poll Poll { get; set; }
         public virtual IList<Post> Posts { get; set; }
-        public virtual IList<Favorite> Favorites { get; set; }
         public bool? Pending { get; set; }
         public int VoteCount
         {

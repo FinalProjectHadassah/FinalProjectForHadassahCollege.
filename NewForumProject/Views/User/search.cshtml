@@ -64,7 +64,14 @@
                     @s.LectureType
                 </td>
                 <td>
-                    @s.MustAttend
+                    @if (s.MustAttend)
+                    {
+                        <p>Duty</p>
+                    }
+                    else
+                    {
+                        <p>Option</p>
+                    }
                 </td>
                 <td>
                     <input type="button" value="הרשמה" onclick="location.href='@Url.Action("SignToCourse", "User", s)'" />
